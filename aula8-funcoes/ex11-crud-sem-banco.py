@@ -48,13 +48,15 @@ def remover_produto():
             print("Código inválido.")
 def buscar_produtos():
     nome_buscar = input("Qual o nome do produto que deseja buscar? ").lower()
-    for produto in produtos:
+    for i, produto in enumerate(produtos):
         if produto['nome'] == nome_buscar:
             print()
             print("PRODUTO ENCONTRADO!")
             print()
-            print(f"Nome: {produto['nome']}\nPreço: {produto['preço']}\nQuantidade: {produto['quantidade']}")
+            print(f"Código:{i}\nNome: {produto['nome']}\nPreço: {produto['preço']}\nQuantidade: {produto['quantidade']}")
             print()
+        else:
+            print("Produto não encontrado.")
 
 while True:
     mostrar_opcoes()
