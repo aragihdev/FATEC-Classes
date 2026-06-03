@@ -5,7 +5,8 @@ def mostrar_opcoes():
     print("2 - Remover produto")
     print("3 - Listar produtos")
     print("4 - Procurar produto")
-    print("5 - Encerrar sessão")
+    print("5 - Editar produto")
+    print("6 - Encerrar sessão")
 def novo_produto():
     nome_produto = input("Qual o nome do produto? ")
     while True:
@@ -37,11 +38,11 @@ def listar_produtos():
 
 def remover_produto():
     listar_produtos()
-    if len(produtos) > 0:
+    if len(produtos) < 0:
         print("Não há produtos para serem removidos.")
     else:
         codigo_remover = int(input("Digite o código do produto que deseja remover: "))
-        if 0 < codigo_remover < len(produtos):
+        if 0 <= codigo_remover < len(produtos):
             produto_removido = produtos.pop(codigo_remover)
             print(f"Produto: {produto_removido['nome']} removido com sucesso.")
         else:
@@ -57,7 +58,17 @@ def buscar_produtos():
             print()
         else:
             print("Produto não encontrado.")
-
+def editar_produto():
+    codigo_editar = int(input("Qual o código do produto que será editado? "))
+    for i, produto in enumerate(produtos):
+        if i == codigo_editar:
+            print()
+            print(f"PRODUTO A SER EDITADO: {produto['nome']}")
+            print()
+            produtos[i]['nome'] = input(f"Qual será o novo nome? ")
+            produtos[i]['preço'] = input(f"Qual será o novo preço? ")
+            produtos[i]['quantidade'] = input(f"Qual será a nova quantidade? ")
+            print()
 while True:
     mostrar_opcoes()
     usuario_escolhe = input("O que deseja fazer?")
@@ -70,6 +81,8 @@ while True:
     elif usuario_escolhe == "4":
         buscar_produtos()
     elif usuario_escolhe == "5":
+        editar_produto()
+    elif usuario_escolhe == "6":
         break
     else:
         print("Opção inválida")
